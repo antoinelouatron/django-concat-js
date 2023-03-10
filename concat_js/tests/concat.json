@@ -1,0 +1,570 @@
+[
+    {
+        "relative_to": "{BASE_DIR}/static/js/src/",
+        "dest": "core/views.js",
+        "src": [
+            "core/_views.js",
+            "vendor/jquery.growl.js"
+        ]
+    },
+    {
+        "relative_to": "{BASE_DIR}/static/js",
+        "dest": "build/vendor/jquery.js",
+        "src": [
+            "vendor/jquery.js",
+            "vendor/jquery-ui.js",
+            "vendor/datepicker-fr.js",
+            "vendor/jquery.ui.timepicker.js"
+        ]
+    }
+    ,
+    [
+        "articleNoPost",
+        {
+            "dest": "static/js/build/content/articles_simple.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/core/form_btns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/pageVisibility.js",
+                "static/js/src/core/mathjaxConfig.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/content/comment_template.js",
+                "static/js/src/libs/listFilter.js",
+                "static/js/src/libs/sortedList.js",
+                "static/js/src/content/articles_main.js"
+            ]
+        }
+    ],
+    [
+        "article",
+        {
+            "dest": "static/js/build/content/articles.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/form_btns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/core/pageVisibility.js",
+                "static/js/src/core/mathjaxConfig.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/core/forms.js",
+                "static/js/src/libs/trie.js",
+                "static/js/src/libs/set.js",
+                "static/js/src/libs/listFilter.js",
+                "static/js/src/libs/sortedList.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/content/expression.js",
+                "static/js/src/content/comment_template.js",
+                "static/js/src/content/add_articles.js",
+                "static/js/src/content/articles_main.js",
+                "static/js/src/mediafiles/attached_files.js"
+            ]
+        }
+    ],
+    [
+        "articleManage",
+        {
+            "dest": "static/js/build/content/articles_manage.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/form_btns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/core/mathjaxConfig.js",
+                "static/js/src/libs/trie.js",
+                "static/js/src/libs/set.js",
+                "static/js/src/content/expression.js",
+                "static/js/src/core/pageVisibility.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/core/forms.js",
+                "static/js/src/content/articles_main.js",
+                "static/js/src/content/add_articles.js",
+                "static/js/src/mediafiles/attached_files.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js"
+            ]
+        }
+    ],
+    [
+        "forumNoEdit",
+        {
+            "dest": "static/js/build/content/forum_simple.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/views.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/content/forum.js"
+            ]
+        }
+    ],
+    [
+        "forum",
+        {
+            "dest": "static/js/build/content/forum.js",
+            "src": [
+                "static/js/build/content/forum_simple.js",
+                "static/js/src/content/comment_template.js"
+            ]
+        }
+    ],
+    [
+        "forumEdition",
+        {
+            "dest": "static/js/build/content/forum_edit.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/form_btns.js",
+                "static/js/src/content/forum_edit.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js"
+            ]
+        }
+    ],
+    [
+        "contentIndex",
+        {
+            "dest": "static/js/build/content/level_index.js",
+            "src": [
+                "static/js/src/core/polyfill.js",
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/core/colors.js",
+                "static/js/src/content/level_index.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js"
+            ]
+        }
+    ],
+    [
+        "contentIndexAdmin",
+        {
+            "dest": "static/js/build/content/level_index_teachers.js",
+            "src": [
+                "static/js/build/content/level_index.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/content/level_index_teachers.js"
+            ]
+        }
+    ],
+    [
+        "printColle",
+        {
+            "dest": "static/js/build/grades/print_colle.js",
+            "src": [
+                "static/js/src/grades/print_colle.js"
+            ]
+        }
+    ],
+    [
+        "colleGrades",
+        {
+            "dest": "static/js/build/grades/add_colle.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/libs/copy_paste.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/grades/colle_manage.js"
+            ]
+        }
+    ],
+    [
+        "displayGrade",
+        {
+            "dest": "static/js/build/grades/display_grades.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/libs/state.manager.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/grades/display_grades.js",
+                "static/js/src/grades/consult_grades.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js"
+            ]
+        }
+    ],
+    [
+        "examGrade",
+        {
+            "dest": "static/js/build/grades/add_exam.js",
+            "src": [
+                "static/js/build/grades/display_grades.js",
+                "static/js/src/libs/copy_paste.js",
+                "static/js/src/core/pageVisibility.js",
+                "static/js/src/grades/exam_manage.js"
+            ]
+        }
+    ],
+    [
+        "linkExam",
+        {
+            "dest": "static/js/build/grades/link_exam.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/core/pageVisibility.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/content/link_exam.js"
+            ]
+        }
+    ],
+    [
+        "submitAssignment",
+        {
+            "dest": "static/js/build/grades/submit_assignment.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/views.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/grades/submit_assignment.js"
+            ]
+        }
+    ],
+    [
+        "bulkimportForm",
+        {
+            "dest": "static/js/build/bulkimport/form.js",
+            "src": [
+                "static/js/src/../vendor/papaparse.min.js",
+                "static/js/src/bulkimport/readDatafile.js"
+            ]
+        }
+    ],
+    [
+        "agendaYear",
+        {
+            "dest": "static/js/build/agenda/year.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/agenda/year.js"
+            ]
+        }
+    ],
+    [
+        "agendaLevel",
+        {
+            "dest": "static/js/build/agenda/periodic.js",
+            "src": [
+                "static/js/src/core/polyfill.js",
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/core/forms.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/core/colors.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/agenda/manage_agenda.js",
+                "static/js/src/core/csrf.js"
+            ]
+        }
+    ],
+    [
+        "agendaCscope",
+        {
+            "dest": "static/js/build/agenda/cscope.js",
+            "src": [
+                "static/js/src/core/polyfill.js",
+                "static/js/src/core/ns.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/agenda/create_cscope.js",
+                "static/js/src/core/csrf.js"
+            ]
+        }
+    ],
+    [
+        "agendaEditCscope",
+        {
+            "dest": "static/js/build/agenda/edit_cscope.js",
+            "src": [
+                "static/js/src/core/polyfill.js",
+                "static/js/src/core/ns.js",
+                "static/js/src/libs/trie.js",
+                "static/js/src/libs/autoComplete.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/agenda/edit_cscope.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/csrf.js"
+            ]
+        }
+    ],
+    [
+        "avatar",
+        {
+            "dest": "static/js/build/users/avatar.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/users/avatar.js",
+                "static/js/src/webpush/subscribe.js"
+            ]
+        }
+    ],
+    [
+        "levelDetails",
+        {
+            "dest": "static/js/build/users/level_details.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/users/level_details.js"
+            ]
+        }
+    ],
+    [
+        "editEmailAdmin",
+        {
+            "dest": "static/js/build/users/edit_email_admin.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/libs/copy_paste.js",
+                "static/js/src/users/edit_email_admin.js"
+            ]
+        }
+    ],
+    [
+        "importUsers",
+        {
+            "dest": "static/js/build/users/import_users.js",
+            "src": [
+                "static/js/build/bulkimport/form.js",
+                "static/js/src/users/import_users.js"
+            ]
+        }
+    ],
+    [
+        "logView",
+        {
+            "dest": "static/js/build/users/log_view.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/users/log_view.js"
+            ]
+        }
+    ],
+    [
+        "quizzCreation",
+        {
+            "dest": "static/js/build/quizz/quizz_creation.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/core/pageVisibility.js",
+                "static/js/src/core/mathjaxConfig.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/libs/listFilter.js",
+                "static/js/src/libs/filter_select.js",
+                "static/js/src/quizz/quizz_form.js",
+                "static/js/src/quizz/quizz_creation.js"
+            ]
+        }
+    ],
+    [
+        "quizzEdition",
+        {
+            "dest": "static/js/build/quizz/quizz_edition.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/core/forms.js",
+                "static/js/src/core/mathjaxConfig.js",
+                "static/js/src/libs/cache.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/libs/listFilter.js",
+                "static/js/src/libs/filter_select.js",
+                "static/js/src/core/pageVisibility.js",
+                "static/js/src/quizz/quizz_form.js",
+                "static/js/src/quizz/quizz_edition.js",
+                "static/js/src/quizz/_qset.js",
+                "static/js/src/quizz/_images.js"
+            ]
+        }
+    ],
+    [
+        "quizzAttend",
+        {
+            "dest": "static/js/build/quizz/attend_quizz.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/mathjaxConfig.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/quizz/attend_quizz.js"
+            ]
+        }
+    ],
+    [
+        "quizzCorrected",
+        {
+            "dest": "static/js/build/quizz/corrected_quizz.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/mathjaxConfig.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/quizz/attend_quizz.js",
+                "static/js/src/quizz/corrected_quizz.js"
+            ]
+        }
+    ],
+    [
+        "quizzList",
+        {
+            "dest": "static/js/build/quizz/quizz_list.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/libs/tableSort.js",
+                "static/js/src/libs/cache.js",
+                "static/js/src/quizz/quizz_list.js"
+            ]
+        }
+    ],
+    [
+        "quizzImport",
+        {
+            "dest": "static/js/build/quizz/quizz_import.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/core/pageVisibility.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/libs/listFilter.js",
+                "static/js/src/libs/filter_select.js",
+                "static/js/src/quizz/quizz_form.js",
+                "static/js/src/quizz/import_file.js"
+            ]
+        }
+    ],
+    [
+        "quizzMissingImages",
+        {
+            "dest": "static/js/build/quizz/missing_images.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/quizz/missing_images.js"
+            ]
+        }
+    ],
+    [
+        "quizzListGrades",
+        {
+            "dest": "static/js/build/quizz/grade_list.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/core/utils.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/quizz/grade_list.js"
+            ]
+        }
+    ],
+    [
+        "chaptersMain",
+        {
+            "dest": "static/js/build/chapters/chapter.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/core/views.js",
+                "static/js/src/core/ajax.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js",
+                "static/js/src/core/mathjaxConfig.js",
+                "static/js/src/chapters/chapter.js"
+            ]
+        }
+    ],
+    [
+        "chaptersList",
+        {
+            "dest": "static/js/build/chapters/chapter_list.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/core/csrf.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js"
+            ]
+        }
+    ],
+    [
+        "homePage",
+        {
+            "dest": "static/js/build/home.js",
+            "src": [
+                "static/js/src/core/ns.js",
+                "static/js/src/libs/raccourci.js",
+                "static/js/src/libs/popup.js"
+            ]
+        }
+    ],
+    [
+        "pushWorker",
+        {
+            "dest": "static/js/build/webpush/service-worker.js",
+            "src": ["static/js/src/webpush/service-worker.js"]
+        }
+    ]
+]

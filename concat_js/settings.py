@@ -30,6 +30,7 @@ class Conf():
         # copy BASE_DIR
         self.BASE_DIR = settings.BASE_DIR
         self.CREATE_SOURCEMAPS = self.conf.get("CREATE_SOURCEMAPS", False)
+        self.LINT_BASE = self.conf.get("LINT_BASE", False)
     
     def get(self, key, default=None):
         return self.conf.get(key, default)

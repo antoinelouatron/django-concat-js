@@ -43,7 +43,8 @@ CONCAT_JS = {
     "CONCAT_ROOT": a Path,
     "CREATE_SOURCEMAPS": False,
     "LINT_COMMAND": False,
-    "FILTER_EXTS": ("js", )
+    "FILTER_EXTS": (".js", ),
+    "LINT_BASE": False 
 }
 ```
 
@@ -77,8 +78,9 @@ where `bundle_spec` is an object described above.
 
 - `CONCAT_ROOT` is a `Path` or string setting. See aboce for meaning. It defaults to `BASE_DIR`
 - `CREATE_SOURCEMAP` is a boolean, which defaults to `False`. If `True`, each bundling will also create a sourcemap file named `{dest}.map`
-- `LINT_COMMAND` must be `False` or a string used to invoke a linter in current environment.
+- `LINT_COMMAND` must be `False` or a command string used to invoke a linter for each file before concatenation.
 - `FILTER_EXTS` is an iterable of extension strings which defaults to the tuple `(".js", )`. Only files with given extensions will be watched for changes.
+- `LINT_BASE` is either `False` (the default) or a path to a directory. Files in this directory will be linted just before watching for changes.
 
 
 ## Usage
@@ -91,4 +93,4 @@ python manage.py watch_js
 
 ## License
 
-`concat-js` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+`django-concat-js` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.

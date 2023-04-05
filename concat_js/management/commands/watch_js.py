@@ -9,11 +9,10 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         from concat_js import watch_src, dep_graph, settings
         bundler = dep_graph.Bundler(printer=self.stdout.write)
-        if bundler.lint_js:
-            self.stdout.write("Linting js files")
-            # TODO : change base dir to lint
-            subprocess.run([bundler.lint_js, "static/js/src/"])
-        self.stdout.write("Watching for js file changes.")
+        if settings.LINT_BASE:
+            self.stdout.write("Linting files in {}.".format(settings.LINT_BASE))
+            subprocess.run([bundler.lint_js, settings.LINT_BASE])
+        self.stdout.write("Watching for file changes.")
         try:
             bundler.check_timestamps()
             watcher = watch_src.JsWatcher()

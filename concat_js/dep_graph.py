@@ -210,7 +210,7 @@ class Bundler():
     
     def get_rebuilds(self, changed_file: Union[Path, str]) -> list:
         """
-        changed file is an absolute path in a string
+        changed file is an absolute path
         """
         key = Path(changed_file)
         targets = self._deps.get(key, [])

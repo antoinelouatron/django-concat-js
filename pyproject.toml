@@ -3,10 +3,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "concat-js"
-description = ''
+name = "django-concat-js"
+description = 'Simple tool to concatenate js files when changed.'
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 license = "MIT"
 keywords = []
 authors = [
@@ -15,7 +15,6 @@ authors = [
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
@@ -23,7 +22,9 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = []
+dependencies = [
+  "watchfiles"
+]
 dynamic = ["version"]
 
 [project.urls]
@@ -39,4 +40,21 @@ dependencies = [
   
 ]
 
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.tox",
+  "/.git"
+]
 
+[tool.hatch.build.targets.wheel]
+exclude = [
+  "/.tox",
+  "/.git",
+#  "/concat_js/test_app"
+]
+
+[tool.hatch.build.targets.custom]
+exclude = [
+  "/.tox",
+  "/.git",
+]

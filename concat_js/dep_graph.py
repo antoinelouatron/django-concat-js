@@ -12,6 +12,7 @@ import os.path
 from pathlib import Path
 import shutil
 import subprocess
+from typing import Union
 
 from concat_js.settings import conf
 
@@ -156,9 +157,10 @@ class Bundler():
         self.mapper = SourceMapper()
         self.printer = printer
         self.extra_files = set([conf.JSON_DEPS])
-        self.lint_js = conf.LINT_JS
+        self.lint_js = conf.LINT_COMMAND
+        self.create_sourcemaps = conf.CREATE_SOURCEMAPS
     
-    def reload(self, json_file=conf.JSON_DEPS):
+    def reload(self, json_file : Union[Path, str]=conf.JSON_DEPS) -> None:
         self._builds = {}
         with open(json_file) as f:
             build_list = json.load(f)
@@ -177,7 +179,7 @@ class Bundler():
             self.checker.get_order()
             self.build_change_deps()
 
-    def build_change_deps(self):
+    def build_change_deps(self) -> None:
         # graph as a dict. Keys are Path instances
         self._deps = {}
         for k, v in self._builds.items():
@@ -186,22 +188,27 @@ class Bundler():
                 current.append(k)
                 self._deps[key] = current
     
-    def check_timestamps(self):
+    def check_timestamps(self) -> None:
         """
         Check if each bundle has a last modified time at least equal
         to each of his dependancies
         """
         for build in self._builds.values():
             bundle = build.dest
+            if not bundle.is_file():
+                # before first build ?
+                continue
             tstamp = bundle.stat().st_mtime
             for path in build.src:
-                if path.stat().st_mtime > tstamp:
+                if not path.is_file():
+                    self.printer("File not found : {}".format(path))
+                elif path.stat().st_mtime > tstamp:
                     self.printer("Dependancy {} was modified after {}".format(
                         path.relative_to(build.relative_to),
                         bundle.relative_to(build.relative_to)
                     ))
     
-    def get_rebuilds(self, changed_file):
+    def get_rebuilds(self, changed_file: Union[Path, str]) -> list:
         """
         changed file is an absolute path in a string
         """
@@ -209,9 +216,7 @@ class Bundler():
         targets = self._deps.get(key, [])
         return [self._builds[k] for k in targets]
     
-    def _write_bundle(self, build : Brick, out: Path):
-        out.touch()
-        return
+    def _write_bundle(self, build : Brick, out: Path) -> None:
         with open(out, "w") as bundle:
             for src in build.src:
                 with open(src) as f:
@@ -221,36 +226,33 @@ class Bundler():
     def _bundle_one(self, build: Brick) -> None:
         """
         Build is one of self._builds value.
-        A dict containing dest, src and optionally  arelative_to key.
         """
-        smap = self.mapper.sourcemap(build)
         # path to files to write
         out = build.dest
-        map_out = str(out) + ".map"
         # write the bundle and source map
         self.printer("Writing {}".format(build.dest))
         self._write_bundle(build, out)
-        self.printer("Writing source map.") 
-        with open(map_out, "w") as map_file:
-            Path(map_out).touch()
-            #json.dump(smap, map_file)
+        if self.create_sourcemaps:
+            map_out = str(out) + ".map"
+            smap = self.mapper.sourcemap(build)
+            self.printer("Writing source map.") 
+            with open(map_out, "w") as map_file:
+                json.dump(smap, map_file)
 
-    def bundle(self, changed_file):
+    def bundle(self, changed_file: Union[Path, str]) -> None:
         # we must invalidate previous line count
         self.mapper.changed(changed_file)
         builds = self.get_rebuilds(changed_file)
         for b in builds:
             self._bundle_one(b)
             
-    def file_changed(self, path):
-        if self._busy:
-            return
+    def file_changed(self, path: Path) -> None:
         if path in self.extra_files:
             self.printer("Main concatenation file changed.")
             self.reload()
         else:
             self.printer("{} changed, rebuild if needed".format(path.name))
-            if self.lint_js:
+            if self.lint_js: # should be a command for linting
                 subprocess.run([self.lint_js, str(path)])
             self.bundle(path)
     
@@ -259,6 +261,12 @@ class Bundler():
         L = self.checker.get_order()
         for dest in L:
             self._bundle_one(self._builds[dest])
+    
+    def dests(self):
+        """
+        Iterator of all bundles file path (destination)
+        """
+        return self._builds.keys()
 
 
 """
@@ -382,7 +390,8 @@ class SourceMapper():
         else:
             file_nb = 0 # no delta it's the first file
         buffer = [self.segment(file_nb, -prev_count)]
-        buffer = buffer + ["AACA"]*(line_count - 1)
+        # add line_count segments, ie one segment for each line after the first
+        buffer = buffer + ["AACA"]*line_count
         return ";".join(buffer), line_count
     
     def sourcemap(self, build: Brick) -> dict:

@@ -1,0 +1,27 @@
+[
+    {
+        "relative_to": "{BASE_DIR}/test_app/static/",
+        "dest": "b1.js",
+        "src": [
+            "src/s1.js",
+            "src/s2.js"
+        ]
+    },
+    {
+        "relative_to": "{BASE_DIR}/test_app/static/",
+        "dest": "b2.js",
+        "src": [
+            "src/s1.js",
+            "src/s3.js"
+        ]
+    },
+    ["this one has a name",
+    {
+        "relative_to": "{BASE_DIR}/test_app/static/",
+        "dest": "b3.js",
+        "src": [
+            "b2.js",
+            "src/s4.js"
+        ]
+    }]
+]

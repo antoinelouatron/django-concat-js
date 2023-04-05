@@ -21,13 +21,18 @@ class Conf():
                 raise ImproperlyConfigured("Invalid setting name CONCAT_JS['{}']".format(k))
             setattr(self, k, v)
         # check default values
-        self.CONCAT_ROOT = self.conf.get("CONCAT_ROOT") or settings.BASE_DIR
-        self.JSON_DEPS = self.conf.get("JSON_DEPS")
+        self.CONCAT_ROOT = Path(self.conf.get("CONCAT_ROOT")) or settings.BASE_DIR
+        self.JSON_DEPS = Path(self.conf.get("JSON_DEPS"))
         if self.JSON_DEPS is None:
             raise ImproperlyConfigured("No JSON_DEPS settings defined")
-        self.LINT_JS = self.conf.get("LINT_JS", False)
+        self.LINT_COMMAND = self.conf.get("LINT_COMMAND", False)
+        self.FILTER_EXTS = self.conf.get("FILTER_EXTS", (".js",))
         # copy BASE_DIR
         self.BASE_DIR = settings.BASE_DIR
+        self.CREATE_SOURCEMAPS = self.conf.get("CREATE_SOURCEMAPS", False)
+    
+    def get(self, key, default=None):
+        return self.conf.get(key, default)
 
 
 conf = Conf()

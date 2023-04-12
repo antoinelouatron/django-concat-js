@@ -252,7 +252,8 @@ class Bundler():
             self.reload()
         else:
             self.printer("{} changed, rebuild if needed".format(path.name))
-            if self.lint_js: # should be a command for linting
+            if self.lint_js and path in self._deps:
+                # don't lint aftre concat.
                 subprocess.run([self.lint_js, str(path)])
             self.bundle(path)
     

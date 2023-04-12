@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 # import signal
+import subprocess
 import threading
 import time
 
@@ -182,6 +183,7 @@ class TestBundler(TestCase):
         bd = dg.Bundler(printer=printer)
         bd.check_timestamps()
         self.assertEqual(len(L), 0)
+        
     
     @classmethod
     def tearDownClass(cls) -> None:
@@ -255,7 +257,6 @@ class TestWatcher(TestCase):
         thread.start()
         bd = dg.Bundler()
         sources = list(bd._deps.keys())
-        print(sources)
         with open(sources[0]) as f:
             orig_content = f.read()
         with open(sources[0], "w") as f:
@@ -269,4 +270,25 @@ class TestWatcher(TestCase):
         thread.join(timeout=1)
         self.assertFalse(thread.is_alive())
         self.assertEqual(len(receiver.changed), 2)
+    
+    def test_command(self):
+        # the django management command
+        subprocess.run(
+            ["python",
+            "{}".format(Path(".") / "concat_js/test_app/manage.py"),
+            "watch_js",
+            "--rebuild"],
+            timeout=1
+        )
+        with self.assertRaises(subprocess.TimeoutExpired):
+            subprocess.run(
+            ["python",
+            "{}".format(Path(".") / "concat_js/test_app/manage.py"),
+            "watch_js"],
+            timeout=1
+            )
+    
+    @classmethod
+    def tearDownClass(cls) -> None:
+        TestBundler.clean_build_files()
         

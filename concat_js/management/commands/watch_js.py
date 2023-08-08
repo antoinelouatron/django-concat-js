@@ -8,8 +8,8 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             "--rebuild",
-            action="store_true",
-            help="Only rebuild all bundle and exit."
+            action='store', nargs="?", default=False, const="True",
+            help="Rebuild all bundle and exit or rebuild one bundle given by its name"
         )
         group = parser.add_mutually_exclusive_group()
         group.add_argument(
@@ -36,8 +36,16 @@ class Command(BaseCommand):
             self.stdout.write("Linting files in {}.".format(conf.LINT_BASE))
             subprocess.run([bundler.lint_js, conf.LINT_BASE])
         if options["rebuild"]:
-            self.stdout.write("Rebuild all bundles.")
-            bundler.rebuild_all()
+            if options["rebuild"] is True:
+                self.stdout.write("Rebuild all bundles.")
+                bundler.rebuild_all()
+            else:
+                # a name is given, try to rebuild that
+                res = bundler.build_by_name(options["rebuild"])
+                if res:
+                    self.stdout.write("{} rebuilt.".format(options["rebuild"]))
+                else:
+                    self.stdout.write("{} not found.".format(options["rebuild"]))
             return
         self.stdout.write("Watching for file changes.")
         try:

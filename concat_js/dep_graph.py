@@ -162,16 +162,21 @@ class Bundler():
     
     def reload(self, json_file : Union[Path, str]=conf.JSON_DEPS) -> None:
         self._builds = {}
+        self._by_name = {}
         with open(json_file) as f:
             build_list = json.load(f)
             for elt in build_list:
+                name = False
                 if isinstance(elt, list):
                     # get rid of optionnal name
                     descr = elt[1]
+                    name = elt[0]
                 else:
                     descr = elt
                 brick = Brick(**descr)
                 self._builds[brick.dest] = brick
+                if name is not False:
+                    self._by_name = brick
             self.checker = DAG(self._builds.values())
             # Warning in case of redondant concatenation
             self.checker.check()
@@ -238,6 +243,17 @@ class Bundler():
             self.printer("Writing source map.") 
             with open(map_out, "w") as map_file:
                 json.dump(smap, map_file)
+    
+    def build_by_name(self, name: str) -> bool:
+        """
+        Build one Bundle, gicen by it's optionnal name.
+        Returns a boolean indicating if given name was found
+        and bundle has been built.
+        """
+        if name in self._by_name:
+            self._bundle_one(self._by_name[name])
+            return True
+        return False
 
     def bundle(self, changed_file: Union[Path, str]) -> None:
         # we must invalidate previous line count

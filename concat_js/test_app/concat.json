@@ -15,7 +15,7 @@
             "src/s3.js"
         ]
     },
-    ["this one has a name",
+    ["aname",
     {
         "relative_to": "{BASE_DIR}/test_app/static/",
         "dest": "b3.js",

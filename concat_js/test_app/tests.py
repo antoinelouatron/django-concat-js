@@ -280,6 +280,13 @@ class TestWatcher(TestCase):
             "--rebuild"],
             timeout=1
         )
+        subprocess.run(
+            ["python",
+            "{}".format(Path(".") / "concat_js/test_app/manage.py"),
+            "watch_js",
+            "--rebuild=aname"],
+            timeout=1
+        )
         with self.assertRaises(subprocess.TimeoutExpired):
             subprocess.run(
             ["python",

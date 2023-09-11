@@ -12,6 +12,7 @@ import os.path
 from pathlib import Path
 import shutil
 import subprocess
+import traceback
 from typing import Union
 
 from concat_js.settings import conf
@@ -58,13 +59,14 @@ class DAG():
         # for given output file
         seen = set()
         to_check = [root]
+        correct = True
         while len(to_check) > 0:
             node = to_check.pop()
             if node in seen:
                 print("Multiple occurence of {} for bundle {}".format(
                         node, root
                     ))
-                return False
+                correct = False
             seen.add(node)
             for elt in self[node]:
                 if elt not in seen:
@@ -73,8 +75,8 @@ class DAG():
                     print("Multiple occurence of {} for bundle {}".format(
                         elt, root
                     ))
-                    return False
-        return True
+                    correct = False
+        return correct
     
     def check(self):
         b = True
@@ -163,26 +165,31 @@ class Bundler():
     def reload(self, json_file : Union[Path, str]=conf.JSON_DEPS) -> None:
         self._builds = {}
         self._by_name = {}
-        with open(json_file) as f:
-            build_list = json.load(f)
-            for elt in build_list:
-                name = False
-                if isinstance(elt, list):
-                    # get rid of optionnal name
-                    descr = elt[1]
-                    name = elt[0]
-                else:
-                    descr = elt
-                brick = Brick(**descr)
-                self._builds[brick.dest] = brick
-                if name is not False:
-                    self._by_name = brick
-            self.checker = DAG(self._builds.values())
-            # Warning in case of redondant concatenation
-            self.checker.check()
-            # raise exception in case of cycle(s)
-            self.checker.get_order()
-            self.build_change_deps()
+        try:
+            with open(json_file) as f:
+                build_list = json.load(f)
+                for elt in build_list:
+                    name = False
+                    if isinstance(elt, list):
+                        # get rid of optionnal name
+                        descr = elt[1]
+                        name = elt[0]
+                    else:
+                        descr = elt
+                    brick = Brick(**descr)
+                    self._builds[brick.dest] = brick
+                    if name is not False:
+                        self._by_name[name] = brick
+                self.checker = DAG(self._builds.values())
+                # Warning in case of redondant concatenation
+                self.checker.check()
+                # raise exception in case of cycle(s)
+                self.checker.get_order()
+                self.build_change_deps()
+        except:
+            self.printer("JSON error")
+            self.printer(traceback.format_exc(limit=-1))
+
 
     def build_change_deps(self) -> None:
         # graph as a dict. Keys are Path instances
